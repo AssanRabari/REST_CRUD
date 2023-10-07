@@ -7,6 +7,9 @@ const  DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/";
 
 connectDB(DATABASE_URL);
 
+//API JSON Middleware
+app.use(express.json());
+
 //Load routed
 app.use("/student", web);
 

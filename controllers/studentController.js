@@ -3,9 +3,16 @@ import StudentModel from "../model/Student.js";
 class StudentController {
     static createDoc = async (req, res) => {
         try {
-            req.data
+            const {name, age, fees} = req.body
+            const doc = new StudentModel({
+                name:name,
+                age:age,
+                fees:fees
+            })
+            const result = await doc.save();
+            res.status(201).send(result);
         } catch (error) {
-            
+            console.log(error,"Creating error")
         }
     }
 
