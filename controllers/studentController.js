@@ -35,14 +35,19 @@ class StudentController {
         }
     }
 
-    static updateDocById = (req, res) => {
-        res.send("update doc");
+    static updateDocById = async (req, res) => {
+        try {
+            const result  = await StudentModel.findByIdAndUpdate(req.params.id, req.body);
+            res.send(result);
+        } catch (error) {
+            console.log(error, "update error")
+        }
     }
 
     static deleteDocById = async (req, res) => {
         try {
-            const result = await StudentModel.deleteOne(req.params.id);
-            res.send("Record Deleted Successfully")
+            const result = await StudentModel.findByIdAndDelete(req.params.id);
+            res.status(204).send(result);
         } catch (error) {
             console.log(error)
         }
