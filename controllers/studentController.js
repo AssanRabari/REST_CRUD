@@ -1,24 +1,44 @@
 import StudentModel from "../model/Student.js";
 
 class StudentController {
-    static createDoc = (req, res) => {
-        res.send("Data is created");
+    static createDoc = async (req, res) => {
+        try {
+            req.data
+        } catch (error) {
+            
+        }
     }
 
-    static getAllDoc = (req, res) => {
-        res.send("All dox");
+    static getAllDoc = async (req, res) => {
+        
+        try {
+            const result = await StudentModel.find();
+            res.send(result)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    static getSingleDocById = (req, res) => {
-        res.send("get Single Doc By Id");
+    static getSingleDocById = async (req, res) => {
+        try {
+            const result = await StudentModel.findById(req.params.id);
+            res.send(result)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     static updateDocById = (req, res) => {
         res.send("update doc");
     }
 
-    static deleteDocById = (req, res) => {
-        res.send("delete Doc By Id");
+    static deleteDocById = async (req, res) => {
+        try {
+            const result = await StudentModel.deleteOne(req.params.id);
+            res.send("Record Deleted Successfully")
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
